@@ -34,13 +34,29 @@ The path format of a path settings document is:
 /encryption/1.0/{PATH}/path.yaml
 ```
 
-### fields
+#### fields
 
 ```
-recursive: true # Whether or not this applies only to one level, or all the way down the tree
+rules:
+- from: <utc timestamp> # optional
+  to: <utc timestamp> # optional
+
+  key: self | /keys/key-id # See [the keys spec](keys.md)
+  recursive: true # Whether or not this applies only to one level, or all the way down the tree
+  type: none | path-based | per-key | static
 ```
 
-TODO
+Rules are processed in order, first match applies. (Though making them all disjoint is expected)
+
+##### per-key
+
+This uses the following construction:
+- plaintext path: `<input-public-key>` - this should be the ed25519 public key of the other party
+- encrypted path: `hkdf(key=scalarmult(<subspace-private-key>, <input-public-key>), info=<namespace>#<subspace>#<path>)`
+
+For someone trying to decrypt they can use the opposite construction to find the path encrypted with their key: `hkdf(key=scalarmult(<their-private-key>, <subspace-public-key>), info=<namespace>#<subspace>#<path>)`
+
+##### TODO more details
 
 ### Payload Encryption settings
 
@@ -50,10 +66,18 @@ The path format of a payload settings document is:
 /encryption/1.0/{PATH}/payload.yaml
 ```
 
-### fields
+#### fields
 
 ```
-recursive: true # Whether or not this applies only to one level, or all the way down the tree
+rules:
+- from: <utc timestamp> # optional
+  to: <utc timestamp> # optional
+
+  key: self | /keys/key-id # See [the keys spec](keys.md)
+  recursive: true # Whether or not this applies only to one level, or all the way down the tree
+  type: none | path-based | static
 ```
 
-TODO
+Rules are processed in order, first match applies. (Though making them all disjoint is expected)
+
+##### TODO more details
