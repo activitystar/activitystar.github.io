@@ -7,6 +7,26 @@
 
 This is an application format for continuous sharing and minting of capability information
 
+## Required /encryption document settings
+
+The following assumes that you've written the following documents:
+
+`/encryption/1.0/capabilities/1.0/private/path.yaml`:
+```
+rules:
+- key: self
+  recursive: false
+  type: per-key
+```
+
+`/encryption/1.0/capabilities/1.0/payload.yaml`:
+```
+rules:
+- key: self
+  recursive: true
+  type: static
+```
+
 ## Subspace
 
 ### Communal Namespaces
@@ -31,19 +51,23 @@ while not allowing people to know who you're actually granting these to.
 
 More formally, given the issuer, a path a capability is published under, and a proposed receiver, it should not be possible for anyone else to know if that is the correct receiver.
 
-For such cases instead of publishing these under the pubkey of the receiving entity, they are instead published under `encrypt(receiver, concat(receiver-pubkey, nonce))`. The receiver must attempt to decrypt all paths until they find their one. The issuer should save and use the same nonce in future so this only needs to happen once.
+`/capabilities/1.0/private/{receiver-pubkey}/{id}`
 
-`/capabilities/1.0/private/{encrypt(receiver, concat(receiver-pubkey, nonce))}/{id}`
+Because of the encryption settings above, this path gets encrypted and only the receiver knows it belongs to them.
 
 ## Capability document IDs
 
-You may want one, or many, depending on the application, if you want to coordinate between multiple client devices etc. These are opaque to the receiver, who should decode all documents under the path prefix.
+From a receiving perspective, these IDs are arbitrary. You want to read all of the ones under your pubkey's path.
 
-A suggested scheme for this would be using `/1`, `/2` etc. If you're merely extending the lifetime of an existing cap, then you can write to the same path. It doesn't matter if you have two clients that independently do this. If you want to change the contents, you should increment the number, and tombstone older entries. This behaviour doesn't handle the same user making changes to the same receiver's caps concurrently on two devices they own - only one will win.
+From a writing perspective, if you're on a single device, you can keep updating the same document.
+
+If you write from multiple devices - and in particular if you're doing automatic updates of these capabilities to extend the expiry - you may have issues with multiple devices overwriting each others updates.
+
+A suggested scheme to handle this is: Read from all current capabilities, combine them, extend, then write to your own (persistent, but random) device ID.
 
 ## Payload format
 
-These should be encrypted under the pubkey of the receiver of the capability. This prevents anyone from knowing which Namespace/Subspace/Path the capability is for
+Encryption happens under the hood, per the encryption definition above.
 
 This should be a list of `McCapability` (TODO whatever the standard encoding of this is)
 
