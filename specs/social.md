@@ -26,5 +26,5 @@ e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1
 - Suggestion (only) - use date-based paths for nice urls - e.g. `feed/public/2024/04/09/1711062719000.yaml`
 - e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/feed/public/2024/04/09/1711062719000.yaml`
 
-`followers/` - follows the [trusted-dids spec](trusted-dids.md).
-- e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/followers/1.0/did:web:example.com.yaml`
+`following/` - follows the [trusted-dids spec](trusted-dids.md).
+- e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/following/1.0/did:web:example.com.yaml`
