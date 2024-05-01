@@ -31,5 +31,7 @@ The `capability` property should be a serialised capability that will allow you 
 following:
   depth: 3 # 1 is just this identity, 2 is the ones they follow too, etc. (But recursive ones are the minimum of their depth and our depth. If `A-3->B-1->C-1->D`, then A can see B and C, but not D)
 	from: UTC-TIMESTAMP # Time we're following this (and recursive identities) from. Optional
-	from: UTC-TIMESTAMP # Time we're following this (and recursive identities) to. We'd expect to update this periodically. Allows for automatic pruning? Optional
+	to: UTC-TIMESTAMP # Time we're following this (and recursive identities) to. We'd expect to update this periodically. Allows for automatic pruning? Optional
 ```
+
+Having these fields gives other people the ability to predict what we might be able to see, and vice-versa. Can be useful for knowing if someone can see your replies, for instance.
