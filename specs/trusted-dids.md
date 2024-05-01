@@ -26,3 +26,10 @@ This might be useful to separate out several classes of trusted-did (e.g. in a s
 The `capability` property should be a serialised capability that will allow you to get more capabilities, following the `/capability/` spec.
 
 (e.g. this is likely the `public` trusted capability - so no-one should have any qualms about you copying it from them and putting it here)
+
+```
+following:
+  depth: 3 # 1 is just this identity, 2 is the ones they follow too, etc. (But recursive ones are the minimum of their depth and our depth. If `A-3->B-1->C-1->D`, then A can see B and C, but not D)
+	from: UTC-TIMESTAMP # Time we're following this (and recursive identities) from. Optional
+	from: UTC-TIMESTAMP # Time we're following this (and recursive identities) to. We'd expect to update this periodically. Allows for automatic pruning? Optional
+```
