@@ -49,6 +49,13 @@ content: Looks like it is going to rain today. Bring an umbrella!
 
 ### Links
 
-Linking to resources should be done using links based off DIDs.
+Linking to resources _SHOULD_ be done using links based off DIDs.
 
-e.g. If I wanted to link to post hosted at `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/feed/public/2024/04/09/1711062719000.yaml`, I'd use the link `did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/feed/public/2024/04/09/1711062719000.yaml`
+This is done with an extended path that includes the namespace
+
+e.g. If you wanted to link to a post:
+- in the `social.baaa...` namespace
+- in the `suzy.baaa...` subspace
+- with the path `/social/feed/public/2024/04/09/1711062719000.yaml`
+
+You'd use the link `did:cinn25519:suzy.baaa.../social.baaa...//social/feed/public/2024/04/09/1711062719000.yaml`

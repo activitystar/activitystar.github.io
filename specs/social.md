@@ -11,20 +11,20 @@ This is an application format for describing how the communal social Namespace w
 
 Clients MUST respect the [encryption](encryption.md) format. Everything that follows is assumed to be after that's decrypted things as appropriate.
 
-## Document prefix
+## Document prefixg
 
-Everything is prefixed using the [did format](did.md), followed by `social/1.0/`
+Most things are prefixed using `/social/`
 
-e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/...`
-
-## DID level contents
-
-`about.yaml` - follows the [about spec](about.md)
+## Contents
 
 `feed/` - follows the [activities spec](activities.md). This is where you post your general social media... "stuff".
 - Suggestion (only) - use `feed/public` and `feed/followers` with different capabilities set, so only followers can see things under that section.
 - Suggestion (only) - use date-based paths for nice urls - e.g. `feed/public/2024/04/09/1711062719000.yaml`
-- e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/feed/public/2024/04/09/1711062719000.yaml`
+- e.g. `/social/feed/public/2024/04/09/1711062719000.yaml`
 
 `following/` - follows the [trusted-dids spec](trusted-dids.md).
-- e.g. `/did/1.0/did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK/social/1.0/following/1.0/did:web:example.com.yaml`
+- e.g. `/social/following/did:web:example.com.yaml`
+
+## Additional extensions
+
+At the top level, `/about/` should be present following the [about spec](about.md)
