@@ -7,6 +7,15 @@ ACTIVITY(pub|streams) + earthSTAR
 ## Goals
 
 - offline/p2p first social media + chat
+  - A person's data is primarily stored on their phone / laptop.
+    - Data can be synced between their devices. Any device can publish.
+    - They may optionally use some cloud-hosted relay/pub so others can get their data while they're offline.
+  - A person's data can be shared selectively - it's not all or nothing, some things can be public, while others are only shared with friends.
+    - You can help your friends content share - but only to people who're authorised to see it.
+    - You don't need to keep *all* of your friend's data. You can throw some away, and resync it later if desired.
+    - If you mark something as deleted, well-behaving clients will also delete it.
+  - Any servers/relays/pubs that are used are not authoratitive. You can use more than one, switch between them. They don't have any power. Server operators can't inspect data
+    - Though they may get metadata. e.g. if you publish something, and send it to a relay, they'll know when you did that etc.
 - design specs suitable for multiple clients to interoperate
 
 ## Non-Goals
@@ -33,8 +42,6 @@ One of the key pieces we need to solve is identity. Who is who, who do you follo
 tl;dr; Use an existing open specification for this - [DIDs](https://www.w3.org/TR/did-core/)
 
 The details are covered in the [did format](specs/did.md).
-
-Identity is foundational, and this is reflected in it forming the root of our key/value tree
 
 ### Privacy
 
